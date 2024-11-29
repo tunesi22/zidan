@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SJT</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="loginStyles.css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../src/logo.png" alt="Logo" />
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#aboutUs">About Us</a></li>
+                <li><a href="index.html#ourProgram">Our Program</a></li>
+            </ul>
+            <button class="login-btn" id="btn-login">Login</button>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+    <div class="wrapper">
+        <div class="login-card">
+            <div class="first-login">
+                <h1 class="login-txt">LOGIN SEBAGAI</h1>
+            </div>
+            <button type="admin" class="btn-1" id="admin">ADMIN</button>
+            <button type="user" class="btn-2" id="user">USER</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userLogin = document.getElementById("user");
+
+            userLogin.addEventListener("click", () => {
+                window.location.href = "logUser.html";
+            });
+
+            const adminLogin = document.getElementById("admin");
+
+            adminLogin.addEventListener("click", () => {
+                window.location.href = "logAdmin.html";
+            });
+
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.querySelector(".nav-links");
+
+            hamburger.addEventListener("click", () => {
+                navLinks.classList.toggle("active");
+            });
+        });
+    </script>
+</body>
+
+<!-- Site footer -->
+<footer class="site-footer">
+    <div class="containerFooter">
+        <div class="row" style="display: flex; gap: 100px;">
+            <div class="company">
+                <h6>Company</h6>
+                <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+            </div>
+            <div class="social">
+                <h6>Social</h6>
+                <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+            </div>
+        </div>
+        <div class="Contact" style="margin-top: 20px;">
+            <h6>Legal</h6>
+            <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+        </div>
+        <hr>
+        <div class="footerContainer">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">PT. SUKSES JAYA TRANSPORINDO</p>
+                </div>
+            </div>
+        </div>
+</footer>
+
+</html>

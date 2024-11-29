@@ -1,0 +1,204 @@
+header {
+    margin: 0;
+    padding: 0;
+}
+
+.cardLogin {
+    background-image: linear-gradient(to bottom right, rgb(255, 175, 27), rgb(255, 157, 45));
+    border-radius: 10px;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #fcd98d;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    width: 380px;
+    padding: 14px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    background: rgb(238, 226, 203);
+    border-radius: 7px;
+}
+
+
+a {
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
+
+a:hover {
+    text-decoration: underline black;
+    font: bold;
+}
+
+.site-footer {
+    margin-top: 140px;
+}
+
+/* Styling hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+}
+
+@media screen and (max-width:1680px) and (min-width:1580px) {
+    .site-footer {
+        margin-top: 140px;
+    }
+}
+
+@media screen and (max-width:426px) {
+    header {
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+        padding: 0px 10px;
+    }
+
+    .login-btn {
+        display: inline-block;
+        margin-left: 180px;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .site-footer {
+        background-color: #26272b;
+        padding: 20px 0 20px;
+        font-size: 15px;
+        line-height: 24px;
+        color: #737373;
+        width: 100%;
+        margin-top: 110px;
+    }
+
+    .row {
+        display: flex;
+        gap: 0px !important;
+    }
+
+    p.text-justify {
+        width: 206px;
+    }
+
+    .cardLogin {
+        background-image: linear-gradient(to bottom right, rgb(255, 175, 27), rgb(255, 157, 45));
+        border-radius: 10px;
+        margin: 50px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 300px;
+    }
+
+    input {
+        width: 250px;
+        padding: 14px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .login-form h3 {
+        text-align: left;
+        font-size: small;
+        margin-left: 0px;
+        color: #000000;
+        background: none;
+    }
+
+    .login input[type="text"],
+    .login input[type="password"] {
+        background: white;
+        padding-top: 15px;
+        margin-left: 0px;
+    }
+
+    .login-form input[type="button"] {
+        margin-right: 65%;
+        margin-top: 15px;
+        height: 40px;
+        width: 90px;
+        background: #ffb429;
+        border: 1px solid #ffb429;
+        border-radius: 5px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        cursor: pointer;
+        margin-left: 0px;
+        padding: 2px;
+    }
+
+}
+
+@media screen and (max-width:376px) {
+    .login-btn{
+        margin-left: 150px;
+    }    
+
+    .popup{
+        top: 30%;
+    }
+}
+
+@media screen and (max-width:321px) {
+    .login-btn{
+        margin-left: 100px;
+    }   
+
+    .popup{
+        top: 35%;
+    }
+    
+    .row {
+        display: flex;
+        gap: 0px !important;
+    }
+
+    .company {
+        width: 50%;
+    }
+}

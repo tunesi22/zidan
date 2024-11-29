@@ -1,0 +1,348 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #fcd98d;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+span#notification {
+    color: rgb(0, 0, 0);
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
+
+a:hover {
+    text-decoration: underline black;
+    font: bold;
+}
+
+.containerWrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.container {
+    width: 500px;
+    height: 550px;
+    margin-top: 50px;
+    margin-left: 50px;
+    background: none;
+    border: none;
+}
+
+.wrapMobilCard {
+    margin-right: 70px;
+}
+
+.cardMobil {
+    background: rgb(255, 255, 255);
+    width: 380px;
+    height: 220px;
+    margin-right: 50px;
+    margin-top: 50px;
+    border-radius: 20px 20px 0px 0px;
+    box-shadow: 6px 5px 12px 0px;
+    display: flex;
+}
+
+.mobilImg {
+    background: black;
+    width: 250px;
+    height: 100%;
+    border-radius: 20px 0px 0px 0px;
+}
+
+.spesifikasiMobil {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+    margin-top: 20px;
+    width: 120px;
+}
+
+a.infoBensin {
+    text-decoration: none;
+    font-size: 10px;
+    color: rgb(180, 180, 180);
+    margin-left: 0px;
+}
+
+
+.border {
+    background: #cfcdcd;
+    height: 5px;
+    width: 358px;
+    margin-left: 8px;
+}
+
+.separator {
+    margin-top: 20px;
+    display: flex;
+  }
+
+.cardInfoMobil {
+    width: 380px;
+    background: rgb(238, 238, 238);
+    height: 250px;
+    border-radius: 0px 0px 20px 20px;
+    box-shadow: 6px 5px 12px 0px;
+}
+
+a.kota {
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.infoMobil {
+    text-align: center;
+    padding-top: 10px
+}
+
+.infoJarak {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+b {
+    font-size: 13px;
+}
+
+.textInfoJarak {
+    font-size: 12px;
+}
+
+.contentJarak {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 18%;
+}
+
+p.tanggalJarak {
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 700
+}
+
+span#arrow {
+    color: #000;
+    font-size: 28px;
+}
+
+.hargaJarak {
+    margin-left: 27px;
+    display: flex;
+    flex-direction: row;
+    gap: 51%;
+}
+
+a#hariJarak {
+    text-decoration: none;
+    font-size: 18px;
+}
+
+a#hargaJarak {
+    text-decoration: none;
+    font-size: 18px;
+}
+
+button#btnProses {
+    margin-left: 5px;
+    margin-top: 20px;
+    width: 180px;
+    height: 50px;
+    border-radius: 10px;
+    background: #e4e2e2;
+    color: black;
+    border: none;
+}
+
+button#btnProses:hover {
+    background: #a7a7a7;
+}
+
+.modal-contentUser {
+    background: white;
+    margin: 6% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.modal-contentAdmin {
+    background-color: #fefefe;
+    margin: 7% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.modal-contentPembayaran {
+    background-color: #fefefe;
+    margin: 7% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.modal-contentMobil {
+    background-color: #fefefe;
+    margin: 7% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.modal-content {
+    width: 80%;
+    margin: auto;
+    top: 20%;
+}
+
+.modal-header h2 {
+    font-size: 17px;
+    color: black;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 8px;
+    display: none;
+    /* Initially hidden */
+}
+
+.row {
+    width: 100%;
+    display: flex;
+}
+
+span.close {
+    margin-left: auto;
+}
+
+/* Styling hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+}
+
+@media screen and (max-width:769px) {
+    .hamburger {
+        display: flex;
+        padding: 0px 10px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .dropdown {
+        left: 260px;
+    }
+}
+
+@media screen and (max-width:426px) {
+    .container {
+        width: 100%;
+        height: fit-content;
+        margin: 0px;
+        background: none;
+        border: none;
+        justify-content: center;
+    }
+
+    .wrapMobilCard {
+        margin: auto 20px;
+    }
+
+    .containerWrap {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: white;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+        padding: 0px 10px;
+    }
+
+    .dropdown {
+        left: 100px;
+    }
+
+    .site-footer {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width:400px) and (min-width:377px) {
+    .dropdown {
+        left: 80px;
+    }
+}
+
+@media screen and (max-width:376px) {
+    .dropdown {
+        left: 70px;
+    }
+}
+
+@media screen and (max-width:321px) {
+    .dropdown {
+        left: 45px;
+    }
+
+}

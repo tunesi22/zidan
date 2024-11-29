@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SJT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="user3.css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../../src/logo.png" alt="Logo" />
+            </div>
+            <ul class="nav-links">
+                <h2><b>Sukses Jaya Transporindo </b></h2>
+                <li>
+                    <span class="material-symbols-outlined" id="notification">
+                        notifications
+                    </span>
+                    <span id="notificationImportant" class="material-symbols-outlined" style="display: none;">
+                        notification_important
+                    </span>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <h2>Notifikasi</h2>
+                                <p style="color: rgb(181, 181, 181);">Notifikasi/Pemberitahuan</p>
+                                <br>
+                                <div class="containerIsiNotifikasi"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="dropdown">
+                <button class="login-btn" id="btnUser"></button>
+                <div id="dropdownMenu" class="dropdown-content">
+                    <button id="btnLogout">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="wrapContent">
+        <div class="container">
+            <h2 class="pembayaran">Pembayaran</h2>
+            <p class="infoPembayaran">Upload bukti pembayaran</p>
+            <p class="step">Step 3 of 4</p>
+            <div class="rekening">
+                <div class="radiobtn">
+                    <input type="radio" class="rekening" name="rekening" value="rekening" disabled />
+                </div>
+                <div class="contentRekening">
+                    <label for="rekening">PT. SUKSES JAYA TRANSPORINDO</label>
+                    <img class="logobank" style="width: 60px; height: 45px;" src="../../src/pngwing.com.png" alt="bank">
+                </div>
+            </div>
+            <a class="salinRekening" id="salinRekening">Salin rekening</a>
+            <p class="noRekening" id="noRekening"></p>
+            <div class="uploadContainer">
+                <div class="uploadCard">
+                    <img class="uploadIcon" src="../../src/drop icon.png" alt="Upload">
+                    <input type="file" id="fileInput" accept=".jpg, .jpeg, .png" style="display: none;" />
+                </div>
+            </div>
+            <p class="infoUpload" id="textInfo">
+                Upload Bukti <br> Pembayaran
+            </p>
+
+            <div class="detailDiv">
+                <strong>Detail Pembayaran</strong>
+                <div class="detailBtnCard">
+                    <div class="detailPembayaran">
+                        <div class="namaDetail">
+                            <p class="detailInfo">
+                                <a>Nama :</a>
+                                <a id="nama"></a>
+                            </p>
+                        </div>
+                        <div class="harga">
+                            <p>Harga :</p>
+                            <p id="harga"></p>
+                            </p>
+                        </div>
+                    </div>
+                    <button class="nextBtn" id="submitBtn" disabled>Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="rentalCard">
+            <h2 class="rentalDetail">Rental Detail</h2>
+            <p class="rentalInfo">Harga dapat berubah sesuai ketentuan</p>
+            <div class="carCard">
+                <img class="carImg" id="carImg"></img>
+                <div class="wrapCar">
+                    <p class="namaMobil" id="namaMobil"><b>NAMA MOBIL</b></p>
+                </div>
+            </div>
+            <div class="subTotal">
+                <div class="totalContent">
+                    <a class="total">SubTotal</a>
+                    <a class="hasilTotal" id="subTotal">Rp. 00000</a>
+                </div>
+                <div class="taxContent">
+                    <p class="totalTax">Tax</p>
+                    <p class="hasilTax" id="tax">0</p>
+                </div>
+            </div>
+            <div class="promoCard">
+                <div class="cardPromo">
+                    <input type="text" class="kodePromo" placeholder="Masukkan Kode Promo">
+                </div>
+                <div class="promoButton">
+                    <button class="applyButton">Apply Now</button>
+                </div>
+            </div>
+            <div class="hargaCard">
+                <div class="hargaContent">
+                    <p class="totalHarga">Total Harga</p>
+                    <p class="infoHarga">Harga sudah termasuk diskon.</p>
+                </div>
+                <p class="harga" id="totalHarga">000000</p>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <div id="loaderPopup" class="popup">
+        <p>Mohon tunggu...</p>
+    </div>
+
+    <div id="confirmationPopup" class="popup">
+        <p>Apakah anda yakin ingin logout?</p>
+        <button class="confirmBtn" onclick="confirmLogout(true)">Iya</button>
+        <button class="confirmBtn" onclick="confirmLogout(false)">Tidak</button>
+    </div>
+    <div class="loader" style="display: none;"></div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const transaksiData = JSON.parse(sessionStorage.getItem("transaksiData"));
+
+            if (transaksiData) {
+                document.getElementById("nama").textContent = transaksiData.nama;
+
+                const banyakHari = transaksiData.banyakHari || [];
+
+                const adjustedHarga = transaksiData.harga * banyakHari;
+                document.getElementById("harga").textContent = adjustedHarga.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+
+                if (transaksiData.mobil) {
+                    const idMobil = transaksiData.mobil;
+                    console.log('ID Mobil from sessionStorage:', idMobil);
+
+                    fetch('../data/mobil.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Data from mobil.json:', data);
+
+                            const mobil = data.find(mobil => mobil.idMobil === idMobil);
+
+                            if (mobil) {
+                                console.log('Mobil found:', mobil);
+
+                                document.getElementById('namaMobil').textContent = mobil.namaMobil;
+                                document.getElementById('carImg').src = mobil.gambar;
+
+                                const rentalDaysText = `${banyakHari} Hari Perentalan`;
+                                document.getElementById('subTotal').textContent = `${mobil.hargaMobil.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })} (${rentalDaysText})`;
+
+                                const subTotalHarga = mobil.hargaMobil;
+                                const totalHarga = subTotalHarga * banyakHari;
+                                const taxPercentage = 0;
+                                const taxAmount = totalHarga * (taxPercentage / 100);
+
+                                const totalBayar = totalHarga + taxAmount;
+
+                                document.getElementById('totalHarga').textContent = totalBayar.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+                                document.getElementById('tax').textContent = `${taxPercentage}%`;
+
+                                transaksiData.totalBayar = totalBayar;
+                                sessionStorage.setItem("transaksiData", JSON.stringify(transaksiData));
+
+                            } else {
+                                console.error('Car not found in mobil.json');
+                            }
+                        })
+                        .catch(error => console.error('Error fetching mobil.json:', error));
+                } else {
+                    console.error('No valid transaksiData found in sessionStorage');
+                }
+            } else {
+                console.log("No transaction data found in sessionStorage.");
+            }
+        });
+
+        //Logika Button Hi dan Logout
+
+        function updateButtonText() {
+            const btnUser = document.getElementById("btnUser");
+            const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+            if (user && user.username) {
+                btnUser.textContent = "Hi, " + user.username + "!";
+            } else {
+                alert("Anda Perlu Login, Silahkan Login Kembali!");
+                window.location.href = "../logUser.html";
+                sessionStorage.clear();
+            }
+        }
+
+        document.getElementById("btnUser").addEventListener("click", function () {
+            const dropdownMenu = document.getElementById("dropdownMenu");
+            dropdownMenu.classList.toggle("show");
+        });
+
+        document
+            .getElementById("btnLogout")
+            .addEventListener("click", function () {
+                document.getElementById("confirmationPopup").style.display = "block";
+            });
+
+        function confirmLogout(confirmed) {
+            if (confirmed) {
+                sessionStorage.removeItem("loggedInUser");
+                sessionStorage.removeItem("transaksiData");
+                window.location.href = "../logUser.html";
+            } else {
+                document.getElementById("confirmationPopup").style.display = "none";
+            }
+        }
+        window.onclick = function (event) {
+            if (!event.target.matches("#btnUser")) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains("show")) {
+                        openDropdown.classList.remove("show");
+                    }
+                }
+            }
+        };
+
+        window.onload = updateButtonText;
+
+        //Logika Copy Clipboard
+        const copyLink = document.querySelector('.salinRekening');
+        const noRekening = document.querySelector('.noRekening');
+
+        copyLink.addEventListener('click', function () {
+
+            const tempTextarea = document.createElement('textarea');
+            tempTextarea.value = noRekening.textContent;
+            document.body.appendChild(tempTextarea);
+            tempTextarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextarea);
+
+            alert('Rekening copied to clipboard!');
+        });
+
+        //Logika Set nomor Rekening
+
+        function setNoRekeningValue() {
+            fetch('../admin/getRekening.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById('noRekening').textContent = data.rekening;
+                    } else {
+                        console.error('Error fetching rekening data:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error fetching rekening data:', error));
+        }
+        document.addEventListener('DOMContentLoaded', setNoRekeningValue);
+
+        //Bagian Upload Gambar
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const uploadCard = document.querySelector('.uploadCard');
+            const fileInput = document.getElementById('fileInput');
+            const textInfo = document.getElementById('textInfo');
+            const submitBtn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+
+            uploadCard.addEventListener('click', function () {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function () {
+                const file = this.files[0];
+
+                if (file) {
+                    const fileExtension = file.name.split('.').pop().toLowerCase();
+                    const allowedExtensions = ['jpg', 'jpeg', 'png'];
+
+                    if (allowedExtensions.includes(fileExtension)) {
+                        const fileURL = URL.createObjectURL(file);
+
+                        let transaksiData = JSON.parse(sessionStorage.getItem("transaksiData")) || {};
+                        transaksiData.bukti = fileURL;
+                        sessionStorage.setItem("transaksiData", JSON.stringify(transaksiData));
+
+                        textInfo.textContent = `${file.name}`;
+                        submitBtn.disabled = false;
+
+                        // Menampilkan Gambar
+                        let imgElement = document.querySelector('.uploadCard img');
+                        if (!imgElement) {
+                            imgElement = document.createElement('img');
+                            imgElement.className = 'previewImage';
+                            imgElement.style.width = '250px';
+                            imgElement.style.height = '250px';
+                            uploadCard.appendChild(imgElement);
+                        }
+                        imgElement.src = fileURL;
+                    } else {
+                        alert('Hanya file .jpg, .jpeg, dan .png yang diperbolehkan');
+                        fileInput.value = '';
+                    }
+                }
+            });
+
+            submitBtn.addEventListener('click', function () {
+                let transaksiData = JSON.parse(sessionStorage.getItem('transaksiData')) || {};
+                transaksiData.status = 'Belum Diproses';
+                const currentDate = new Date();
+                const formattedDate = currentDate.toISOString().split('T')[0];
+                transaksiData.submit = formattedDate;
+                transaksiData.isRead = false;
+
+                const file = fileInput.files[0];
+                if (file) {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('transaksiData', JSON.stringify(transaksiData));
+
+                    fetch('update_transaksi.php', {
+                        method: 'POST',
+                        body: formData,
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+
+                            if (data.status === 'success') {
+                                sessionStorage.removeItem('transaksiData');
+                                alert('Data Anda sedang diproses, harap tunggu konfirmasi dari perusahaan. Anda akan dikirimkan ke halaman user kembali.');
+                                window.location.href = 'user.html';
+                            } else {
+                                throw new Error('Error: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('There was a problem with the fetch operation:', error);
+                        });
+                } else {
+                    alert('Tidak ada file gambar untuk diupload.');
+                }
+            });
+        });
+
+        //Logika Notifikasi
+        document.addEventListener("DOMContentLoaded", function () {
+            var modal = document.getElementById("myModal");
+            var spanNotif = document.getElementById("notification");
+            var span = document.getElementsByClassName("close")[0];
+
+            checkAndUpdateNotificationIcon();
+
+            spanNotif.onclick = function () {
+                modal.style.display = "block";
+                fetchTransaksiData();
+            };
+
+            span.onclick = function () {
+                modal.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+            // Fungsi  ikon notifikasi
+            function checkAndUpdateNotificationIcon() {
+                const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+                const idUser = loggedInUser.idUser;
+
+                fetch('getTransaksi.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Network response was not ok: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+
+                        if (data.error) {
+                            console.log(data.error);
+                            return;
+                        }
+
+                        if (!Array.isArray(data)) {
+                            console.log("Data transaksi tidak tersedia atau tidak valid.");
+                            return;
+                        }
+
+                        const userTransaksi = data.filter(transaksi => transaksi.user === idUser);
+
+                        let isBelumDiprosesFound = false;
+                        if (userTransaksi.length > 0) {
+                            isBelumDiprosesFound = userTransaksi.some(transaksi => transaksi.status === "Belum Diproses");
+                        }
+
+                        updateNotificationIcon(isBelumDiprosesFound);
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+
+            function fetchTransaksiData() {
+                const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+                const idUser = loggedInUser.idUser;
+
+                fetch('getTransaksi.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Network response was not ok: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+
+                        if (data.error) {
+                            console.log(data.error);
+                            return;
+                        }
+
+                        if (!Array.isArray(data)) {
+                            console.log("Data transaksi tidak tersedia atau tidak valid.");
+                            return;
+                        }
+
+                        const userTransaksi = data.filter(transaksi => transaksi.user === idUser);
+
+                        if (userTransaksi.length > 0) {
+                            generateModalContent(userTransaksi);
+                        } else {
+                            console.log("Tidak ada data yang cocok untuk idUser:", idUser);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+
+            // Fungsi ikon notifikasi
+            function updateNotificationIcon(isBelumDiprosesFound) {
+                const notificationIcon = document.getElementById('notification');
+
+                if (isBelumDiprosesFound) {
+                    notificationIcon.textContent = 'notification_important';
+                    notificationIcon.style.color = '#EA3323';
+                } else {
+                    notificationIcon.textContent = 'notifications';
+                    notificationIcon.style.color = '#000';
+                }
+            }
+
+            function generateModalContent(transaksiList) {
+                const isiNotifikasiContainer = document.querySelector('.containerIsiNotifikasi');
+                isiNotifikasiContainer.innerHTML = '';
+
+                let isBelumDiprosesFound = false;
+
+                transaksiList.forEach(transaksi => {
+                    if (transaksi.status === "Belum Diproses") {
+                        isBelumDiprosesFound = true;
+                    }
+
+                    const newIsiNotifikasiDiv = document.createElement('div');
+                    newIsiNotifikasiDiv.classList.add('isiNotifikasi');
+
+                    const radioButtonDiv = document.createElement('div');
+                    radioButtonDiv.classList.add('radioButton');
+
+                    if (transaksi.status === "Belum Diproses") {
+                        const radioButton = document.createElement('input');
+                        radioButton.type = 'radio';
+                        radioButton.classList.add('rbtn');
+                        radioButtonDiv.appendChild(radioButton);
+                    } else {
+                        const checkCircleSpan = document.createElement('span');
+                        checkCircleSpan.className = 'material-symbols-outlined';
+                        checkCircleSpan.textContent = 'check_circle';
+                        checkCircleSpan.id = "success";
+                        radioButtonDiv.appendChild(checkCircleSpan);
+                    }
+
+                    const textNotifikasiDiv = document.createElement('div');
+                    textNotifikasiDiv.classList.add('textNotifikasi');
+
+                    const idTransaksiLink = document.createElement('p');
+                    idTransaksiLink.href = '#';
+                    idTransaksiLink.id = 'idTransaksi';
+                    idTransaksiLink.textContent = `Kode Pesanan: ${transaksi.idTransaksi}`;
+
+                    const tanggalLink = document.createElement('p');
+                    tanggalLink.href = '#';
+                    tanggalLink.id = 'tanggal';
+                    tanggalLink.textContent = `Tanggal jatuh tempo: ${transaksi.tanggal}`;
+
+                    textNotifikasiDiv.appendChild(idTransaksiLink);
+                    textNotifikasiDiv.appendChild(document.createElement('br'));
+                    textNotifikasiDiv.appendChild(tanggalLink);
+
+                    if (transaksi.status === "Belum Diproses") {
+                        const unsuccess = document.createElement('span');
+                        unsuccess.className = "material-symbols-outlined";
+                        unsuccess.id = 'unSuccess';
+                        unsuccess.textContent = 'error';
+                        textNotifikasiDiv.appendChild(unsuccess);
+                    }
+
+                    newIsiNotifikasiDiv.appendChild(radioButtonDiv);
+                    newIsiNotifikasiDiv.appendChild(textNotifikasiDiv);
+
+                    isiNotifikasiContainer.appendChild(newIsiNotifikasiDiv);
+                });
+
+                const notificationIcon = document.getElementById('notification');
+
+                if (isBelumDiprosesFound) {
+                    notificationIcon.textContent = 'notification_important';
+                    notificationIcon.style.color = '#EA3323';
+                } else {
+                    notificationIcon.textContent = 'notifications';
+                    notificationIcon.style.color = '#000';
+                }
+
+                const modalBody = document.querySelector('.modal-body');
+                modalBody.style.overflowY = 'auto';
+                modalBody.style.maxHeight = '400px';
+            }
+        });
+
+    </script>
+</body>
+
+<!-- Site footer -->
+<footer class="site-footer">
+    <div class="containerFooter">
+      <div class="row">
+        <div class="company">
+          <h6>Company</h6>
+          <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+        </div>
+        <div class="social">
+          <h6>Social</h6>
+          <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+        </div>
+      </div>
+      <div class="Contact" style="margin-top: 20px;">
+        <h6>Legal</h6>
+        <p class="contact">PT. SUKSES JAYA TRANSPORINDO</p>
+      </div>
+      <hr>
+      <div class="footerContainer">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">PT. SUKSES JAYA TRANSPORINDO</p>
+          </div>
+        </div>
+      </div>
+  </footer>
+
+
+</html>

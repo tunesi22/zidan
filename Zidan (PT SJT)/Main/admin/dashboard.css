@@ -1,0 +1,175 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #fcd98d;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid black;
+    padding: 10px 10px;
+    background-color: #F9D689;
+    width: 100%;
+}
+
+.textHeader {
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
+
+.textHeader:hover {
+    text-decoration: underline black;
+    font: bold;
+}
+
+.container {
+    background: none;
+    border: none;
+    display: flex;
+    height: 50px;
+}
+
+.dashboardBtn {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    justify-content: center;
+}
+
+button#pendingBtn {
+    width: 250px;
+    height: 85px;
+}
+
+button#prosesBtn {
+    width: 250px;
+    height: 85px;
+}
+
+button#suksesBtn {
+    width: 250px;
+    height: 85px;
+}
+
+button#rejectBtn {
+    width: 250px;
+    height: 85px;
+}
+
+button#userBtn {
+    width: 250px;
+    height: 85px;
+}
+
+.dropdown-content {
+    min-width: 105px;
+}
+
+.page-content {
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+.dashboardBtn .btn {
+    cursor: pointer;
+}
+
+.modal-contentUser {
+    background: white;
+    margin: 6% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.modal-contentAdmin {
+    background-color: #fefefe;
+    margin: 7% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.modal-contentPembayaran {
+    background-color: #fefefe;
+    margin: 7% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.modal-contentMobil {
+    background-color: #fefefe;
+    margin: 7% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.modal-content {
+    width: 80%;
+    margin: auto;
+    top: 20%;
+}
+
+.modal-header h2 {
+    font-size: 17px;
+    color: black;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 8px;
+    display: none;
+    /* Initially hidden */
+}
+
+tbody {
+    text-align: center;
+}
+
+thead {
+    text-align: center;
+}
+
+li {
+    list-style: none;
+    margin: 0px;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+}
+
+.site-footer {
+    background-color: #26272b;
+    padding: 20px 0 20px;
+    font-size: 15px;
+    line-height: 24px;
+    color: #737373;
+    margin-top: 140px;
+    width: 100%;
+}
+

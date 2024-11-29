@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>SJT</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="user2.css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../../src/logo.png" alt="Logo" />
+            </div>
+            <ul class="nav-links">
+                <h2><b>Sukses Jaya Transporindo </b></h2>
+                <li>
+                    <span class="material-symbols-outlined" id="notification">
+                        notifications
+                    </span>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="headerTitle">
+                                    <h2>Notifikasi</h2>
+                                    <p style="color: rgb(181, 181, 181);">Notifikasi/Pemberitahuan</p>
+                                </div>
+                                <span class="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <div class="containerIsiNotifikasi"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="dropdown">
+                <button class="login-btn" id="btnUser"></button>
+                <div id="dropdownMenu" class="dropdown-content">
+                    <button id="btnLogout">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h2 class="tgl-rental">Tanggal Rental</h2>
+        <p class="info-tgl">Pilih tanggal rental anda.</p>
+        <p class="step">Step 2 of 4</p>
+        <div class="input-tanggalcl">
+            <input type="radio" class="input-tanggal" checked="checked" name="input-tanggal" value="input-tanggal" />
+            <label class="input-tanggal">Input Tanggal</label>
+            <div class="isi-tanggal">
+                <h3 class="tanggal-txt">Tanggal</h3>
+                <div id="tanggalInputsContainer">
+                    <input type="date" id="tanggalDari" placeholder="Dari Tanggal" class="tanggalInput" />
+                    <p>Sampai dengan</p>
+                    <input type="date" id="tanggalSampai" placeholder="Sampai Tanggal" class="tanggalInput" />
+                </div>
+                <div class="next2">
+                    <button class="next-btn2" id="nextBtn">Next</button>
+                </div>
+                <div id="disabledDatesContainer" style="margin-top: 20px;">
+                    <h4>Tanggal yang Tidak Tersedia:</h4>
+                    <ul id="disabledDatesList" style="list-style-type: none; padding: 0;"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="loaderPopup" class="popup">
+        <p>Mohon tunggu...</p>
+    </div>
+
+    <div id="confirmationPopup" class="popup">
+        <p>Apakah anda yakin ingin logout?</p>
+        <button class="confirmBtn" onclick="confirmLogout(true)">Iya</button>
+        <button class="confirmBtn" onclick="confirmLogout(false)">Tidak</button>
+    </div>
+
+    <script>
+        function updateButtonText() {
+            const btnUser = document.getElementById("btnUser");
+            const user = JSON.parse(sessionStorage.getItem("loggedInUser"));
+
+            if (user && user.username) {
+                btnUser.textContent = "Hi, " + user.username + "!";
+            } else {
+                alert("Anda Perlu Login, Silahkan Login Kembali!");
+                window.location.href = "../logUser.html";
+                sessionStorage.clear();
+            }
+        }
+
+        document.getElementById("btnUser").addEventListener("click", function () {
+            const dropdownMenu = document.getElementById("dropdownMenu");
+            dropdownMenu.classList.toggle("show");
+        });
+
+        document
+            .getElementById("btnLogout")
+            .addEventListener("click", function () {
+                document.getElementById("confirmationPopup").style.display = "block";
+            });
+
+        function confirmLogout(confirmed) {
+            if (confirmed) {
+                sessionStorage.removeItem("loggedInUser");
+                sessionStorage.removeItem("transaksiData");
+                window.location.href = "../logUser.html";
+            } else {
+                document.getElementById("confirmationPopup").style.display = "none";
+            }
+        }
+        window.onclick = function (event) {
+            if (!event.target.matches("#btnUser")) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains("show")) {
+                        openDropdown.classList.remove("show");
+                    }
+                }
+            }
+        };
+
+        window.onload = updateButtonText;
+
+        document.getElementById("nextBtn").disabled = true;
+
+        //Logika Tanggal
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const userId = JSON.parse(sessionStorage.getItem('loggedInUser')).idUser;
+
+            fetch(`getDisabledDates.php?userId=${userId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const disabledDatesList = document.getElementById("disabledDatesList");
+
+                    disabledDatesList.innerHTML = '';
+
+                    if (Array.isArray(data) && data.length > 0) {
+                        data.forEach(dateRange => {
+                            const listItem = document.createElement("li");
+                            listItem.textContent = dateRange;
+                            disabledDatesList.appendChild(listItem);
+                        });
+                    } else {
+                        const listItem = document.createElement("li");
+                        listItem.textContent = "Tidak ada tanggal yang tidak tersedia.";
+                        disabledDatesList.appendChild(listItem);
+                    }
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                    const disabledDatesList = document.getElementById("disabledDatesList");
+                    const listItem = document.createElement("li");
+                    listItem.textContent = "Error fetching data.";
+                    disabledDatesList.appendChild(listItem);
+                });
+        });
+
+        function checkDatesInput() {
+            const tanggalDari = document.getElementById('tanggalDari').value;
+            const tanggalSampai = document.getElementById('tanggalSampai').value;
+
+            if (tanggalDari) {
+                document.getElementById('tanggalSampai').setAttribute('min', tanggalDari);
+            }
+
+            document.getElementById('nextBtn').disabled = !(tanggalDari && tanggalSampai);
+        }
+
+        document.getElementById('tanggalDari').addEventListener('change', checkDatesInput);
+        document.getElementById('tanggalSampai').addEventListener('change', checkDatesInput);
+
+        document.getElementById('tanggalDari').addEventListener('click', function () {
+            const userId = JSON.parse(sessionStorage.getItem('loggedInUser')).idUser;
+
+            fetch(`getTanggal.php?userId=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const today = new Date();
+                    const tanggalDariInput = document.getElementById('tanggalDari');
+                    const tanggalSampaiInput = document.getElementById('tanggalSampai');
+
+                    tanggalDariInput.value = '';
+                    tanggalSampaiInput.value = '';
+
+                    const disabledDates = [];
+
+                    data.forEach(transaksi => {
+                        const [start, end] = transaksi.tanggal.split(' / ');
+                        const startDate = new Date(start);
+                        const endDate = new Date(end);
+
+                        let currentDate = new Date(startDate);
+                        while (currentDate <= endDate) {
+                            disabledDates.push(currentDate.toISOString().split('T')[0]);
+                            currentDate.setDate(currentDate.getDate() + 1);
+                        }
+                    });
+
+                    const disableDatesInInput = (inputElement) => {
+                        const todayStr = today.toISOString().split('T')[0];
+                        inputElement.setAttribute('min', todayStr); 
+                        
+                        disabledDates.forEach(date => {
+                            const option = document.createElement('option');
+                            option.value = date;
+                            option.textContent = date;
+                            inputElement.appendChild(option);
+                        });
+
+                        inputElement.addEventListener('input', function () {
+                            const inputValue = inputElement.value;
+                            if (disabledDates.includes(inputValue)) {
+                                alert(`Tanggal ${inputValue} sudah ada di database.`);
+                                inputElement.value = ''; 
+                            }
+                        });
+                    };
+
+                    disableDatesInInput(tanggalDariInput);
+                    disableDatesInInput(tanggalSampaiInput);
+                })
+                .catch(error => console.error('Error fetching transaction data:', error));
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function () {
+            const tanggalDari = document.getElementById('tanggalDari').value;
+            const tanggalSampai = document.getElementById('tanggalSampai').value;
+
+            const today = new Date();
+
+            if (tanggalDari && tanggalSampai) {
+                const date1 = new Date(tanggalDari);
+                const date2 = new Date(tanggalSampai);
+
+                if (date1 < today || date2 < today) {
+                    alert('Tanggal tidak boleh sebelum hari ini.');
+                    return;
+                }
+
+                let transaksiData = JSON.parse(sessionStorage.getItem('transaksiData'));
+                const daysDiff = Math.ceil((date2 - date1) / (1000 * 3600 * 24)) + 1;
+
+                transaksiData.tanggal = `${tanggalDari} / ${tanggalSampai}`;
+                transaksiData.banyakHari = daysDiff;
+
+                sessionStorage.setItem('transaksiData', JSON.stringify(transaksiData));
+
+                alert('Tanggal dan jumlah hari berhasil disimpan!');
+                window.location.href = "user3.html";
+            } else {
+                alert('Harap pilih kedua tanggal.');
+            }
+        });
+
+
+        //Logika Notifikasi
+        document.addEventListener("DOMContentLoaded", function () {
+            var modal = document.getElementById("myModal");
+            var spanNotif = document.getElementById("notification");
+            var span = document.getElementsByClassName("close")[0];
+
+            checkAndUpdateNotificationIcon();
+
+            spanNotif.onclick = function () {
+                modal.style.display = "block";
+                fetchTransaksiData();
+            };
+
+            span.onclick = function () {
+                modal.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+            function checkAndUpdateNotificationIcon() {
+                const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+                const idUser = loggedInUser.idUser;
+
+                fetch('getTransaksi.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Network response was not ok: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+
+                        if (data.error) {
+                            console.log(data.error);
+                            return;
+                        }
+
+                        if (!Array.isArray(data)) {
+                            console.log("Data transaksi tidak tersedia atau tidak valid.");
+                            return;
+                        }
+
+                        const userTransaksi = data.filter(transaksi => transaksi.user === idUser);
+
+                        let isBelumDiprosesFound = false;
+                        if (userTransaksi.length > 0) {
+                            isBelumDiprosesFound = userTransaksi.some(transaksi => transaksi.status === "Belum Diproses");
+                        }
+
+                        updateNotificationIcon(isBelumDiprosesFound);
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+
+            function fetchTransaksiData() {
+                const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+                const idUser = loggedInUser.idUser;
+
+                fetch('getTransaksi.php')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Network response was not ok: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+
+                        if (data.error) {
+                            console.log(data.error);
+                            return;
+                        }
+
+                        if (!Array.isArray(data)) {
+                            console.log("Data transaksi tidak tersedia atau tidak valid.");
+                            return;
+                        }
+
+                        const userTransaksi = data.filter(transaksi => transaksi.user === idUser);
+
+                        if (userTransaksi.length > 0) {
+                            generateModalContent(userTransaksi);
+                        } else {
+                            console.log("Tidak ada data yang cocok untuk idUser:", idUser);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+
+            // Fungsi ikon notifikasi
+            function updateNotificationIcon(isBelumDiprosesFound) {
+                const notificationIcon = document.getElementById('notification');
+
+                if (isBelumDiprosesFound) {
+                    notificationIcon.textContent = 'notification_important';
+                    notificationIcon.style.color = '#EA3323';
+                } else {
+                    notificationIcon.textContent = 'notifications';
+                    notificationIcon.style.color = '#000';
+                }
+            }
+
+            function generateModalContent(transaksiList) {
+                const isiNotifikasiContainer = document.querySelector('.containerIsiNotifikasi');
+                isiNotifikasiContainer.innerHTML = '';
+
+                let isBelumDiprosesFound = false;
+
+                transaksiList.forEach(transaksi => {
+                    if (transaksi.status === "Belum Diproses") {
+                        isBelumDiprosesFound = true;
+                    }
+
+                    const newIsiNotifikasiDiv = document.createElement('div');
+                    newIsiNotifikasiDiv.classList.add('isiNotifikasi');
+
+                    const radioButtonDiv = document.createElement('div');
+                    radioButtonDiv.classList.add('radioButton');
+
+                    if (transaksi.status === "Belum Diproses") {
+                        const radioButton = document.createElement('input');
+                        radioButton.type = 'radio';
+                        radioButton.classList.add('rbtn');
+                        radioButtonDiv.appendChild(radioButton);
+                    } else {
+                        const checkCircleSpan = document.createElement('span');
+                        checkCircleSpan.className = 'material-symbols-outlined';
+                        checkCircleSpan.textContent = 'check_circle';
+                        checkCircleSpan.id = "success";
+                        radioButtonDiv.appendChild(checkCircleSpan);
+                    }
+
+                    const textNotifikasiDiv = document.createElement('div');
+                    textNotifikasiDiv.classList.add('textNotifikasi');
+
+                    const idTransaksiLink = document.createElement('p');
+                    idTransaksiLink.href = '#';
+                    idTransaksiLink.id = 'idTransaksi';
+                    idTransaksiLink.textContent = `Kode Pesanan: ${transaksi.idTransaksi}`;
+
+                    const tanggalLink = document.createElement('p');
+                    tanggalLink.href = '#';
+                    tanggalLink.id = 'tanggal';
+                    tanggalLink.textContent = `Tanggal jatuh tempo: ${transaksi.tanggal}`;
+
+                    textNotifikasiDiv.appendChild(idTransaksiLink);
+                    textNotifikasiDiv.appendChild(document.createElement('br'));
+                    textNotifikasiDiv.appendChild(tanggalLink);
+
+                    if (transaksi.status === "Belum Diproses") {
+                        const unsuccess = document.createElement('span');
+                        unsuccess.className = "material-symbols-outlined";
+                        unsuccess.id = 'unSuccess';
+                        unsuccess.textContent = 'error';
+                        textNotifikasiDiv.appendChild(unsuccess);
+                    }
+
+                    newIsiNotifikasiDiv.appendChild(radioButtonDiv);
+                    newIsiNotifikasiDiv.appendChild(textNotifikasiDiv);
+
+                    isiNotifikasiContainer.appendChild(newIsiNotifikasiDiv);
+                });
+
+                const notificationIcon = document.getElementById('notification');
+
+                if (isBelumDiprosesFound) {
+                    notificationIcon.textContent = 'notification_important';
+                    notificationIcon.style.color = '#EA3323';
+                } else {
+                    notificationIcon.textContent = 'notifications';
+                    notificationIcon.style.color = '#000';
+                }
+
+                const modalBody = document.querySelector('.modal-body');
+                modalBody.style.overflowY = 'auto';
+                modalBody.style.maxHeight = '400px';
+            }
+        });
+    </script>
+</body>
+
+<footer class="site-footer">
+    <div class="containerFooter">
+        <div class="row" style="display: flex;">
+            <div class="company">
+                <h6>Company</h6>
+                <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+            </div>
+            <div class="social">
+                <h6>Social</h6>
+                <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+            </div>
+        </div>
+        <div class="Contact" style="margin-top: 20px;">
+            <h6>Legal</h6>
+            <p class="contact">PT. SUKSES JAYA TRANSPORINDO</p>
+        </div>
+        <hr>
+        <div class="footerContainer">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">PT. SUKSES JAYA TRANSPORINDO</p>
+                </div>
+            </div>
+        </div>
+</footer>
+
+
+</html>

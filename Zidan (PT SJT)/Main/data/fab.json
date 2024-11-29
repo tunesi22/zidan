@@ -1,0 +1,36 @@
+{
+  "faq": [
+    {
+      "_id": "1",
+      "question": "Apa syarat untuk menyewa mobil?",
+      "answer": "Untuk menyewa mobil, Anda harus memiliki SIM A yang masih berlaku dan kartu identitas resmi."
+    },
+    {
+      "_id": "2",
+      "question": "Bagaimana cara melakukan pemesanan mobil?",
+      "answer": "Anda dapat melakukan pemesanan mobil melalui website kami atau langsung datang ke kantor cabang terdekat."
+    },
+    {
+      "_id": "3",
+      "question": "Apakah ada batasan jarak tempuh untuk penyewaan?",
+      "answer": "Tidak ada batasan jarak tempuh, namun biaya tambahan akan dikenakan untuk perjalanan di luar kota."
+    },
+    {
+      "_id": "4",
+      "question": "Apakah mobil sudah termasuk asuransi?",
+      "answer": "Ya, semua mobil kami sudah dilengkapi dengan asuransi dasar. Anda dapat memilih tambahan asuransi jika diperlukan."
+    },
+    {
+      "_id": "5",
+      "question": "Berapa lama durasi minimum penyewaan mobil?",
+      "answer": "Durasi minimum penyewaan adalah 1 hari atau 24 jam."
+    }
+  ],
+  "contact": [
+    {
+      "url": "https://wa.me/6282126426395?text=Halo,%20Saya%20tertarik%20dengan%20program%20anda",
+      "phone": "+62 812 3456 7890",
+      "email": "cs@sewamobil.com"
+    }
+  ]
+}

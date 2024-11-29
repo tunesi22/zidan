@@ -1,0 +1,20 @@
+[
+    {
+        "idUser": 1,
+        "username": "user",
+        "password": "user",
+        "noTelp": "733",
+        "alamat": "ddd",
+        "kota": "ddd",
+        "mobil": "1"
+    },
+    {
+        "idUser": 2,
+        "username": "fadil",
+        "password": "fadil",
+        "noTelp": "08",
+        "alamat": ".",
+        "kota": ".",
+        "mobil": "2"
+    }
+]

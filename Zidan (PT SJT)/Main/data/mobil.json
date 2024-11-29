@@ -1,0 +1,18 @@
+[
+    {
+        "idMobil": "1",
+        "namaMobil": "jdjaojdos",
+        "hargaMobil": 200000,
+        "gambar": "..\/uploads\/mobil\/Screenshot 2024-05-07 062210.png",
+        "noPol": "B 1314 XAS",
+        "status": "Terpakai"
+    },
+    {
+        "idMobil": "2",
+        "namaMobil": "sigra type r",
+        "hargaMobil": 200000,
+        "gambar": "..\/uploads\/mobil\/Jepretan_Layar_2024-09-26_pukul_23.32.20-removebg-preview.png",
+        "noPol": "b 65 six",
+        "status": "Terpakai"
+    }
+]

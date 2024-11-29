@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1440px initial-scale= 1.0">
+    <title>SJT</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.bootstrap5.css">
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../../src/logo.png" alt="Logo" />
+            </div>
+            <ul class="nav-links">
+
+                <li><a class="textHeader" href="dashboard.html">Dashboard</a></li>
+                <li><a class="textHeader" onclick="openModalUser()">Buat User</a></li>
+                <div id="registerModalUser" class="modalUser">
+                    <div class="modal-contentUser">
+                        <span class="closeUser" onclick="closeModalUser()">&times;</span>
+                        <h2>Register User</h2>
+                        <form id="registerFormUser" class="registerForm">
+                            <label for="username">Username</label>
+                            <input type="text" id="usernameUser" name="username" required>
+
+                            <label for="password">Password</label>
+                            <input type="password" id="passwordUser" name="password" required>
+
+                            <label for="noTelp">No Telp</label>
+                            <input type="number" id="noTelpUser" name="noTelp" required>
+
+                            <label for="alamat">Alamat</label>
+                            <input type="text" id="alamatUser" name="alamat" required>
+
+                            <label for="kota">Kota</label>
+                            <input type="text" id="kotaUser" name="kota" required>
+
+                            <label for="mobil">Mobil</label>
+                            <select id="mobil" name="mobil">
+                            </select>
+
+                            <button type="submit" class="registerBtn" id="registUserBtn" disabled>Register</button>
+                        </form>
+                    </div>
+                </div>
+
+                <li>
+                    <a class="textHeader" onclick="openModalAdmin()">Buat Admin</a>
+                </li>
+                <div id="registerModalAdmin" class="modalAdmin">
+                    <div class="modal-contentAdmin">
+                        <span class="closeAdmin" onclick="closeModalAdmin()">&times;</span>
+                        <h2>Register Admin</h2>
+                        <form id="registerFormAdmin" class="registerForm">
+                            <label for="username">Username</label>
+                            <input type="text" id="usernameAdmin" name="username" required>
+
+                            <label for="password">Password</label>
+                            <input type="password" id="passwordAdmin" name="password" required>
+
+                            <button type="submit" class="registerBtn" id="registerBtnAdmin" disabled>Register</button>
+                        </form>
+                    </div>
+                </div>
+
+                <li><a class="textHeader" onclick="openModalPembayaran()">Edit Pembayaran</a></li>
+                <div id="registerModalPembayaran" class="modalPembayaran">
+                    <div class="modal-contentPembayaran">
+                        <span class="closePembayaran" onclick="closeModalPembayaran()">&times;</span>
+                        <h2>Edit Pembayaran</h2>
+                        <form id="registerFormPembayaran" class="registerForm">
+                            <label for="nomorRekeningSekarang">Nomor Rekening Sekarang</label>
+                            <p id="nomorRekeningSekarang"></p>
+
+                            <label for="nomorRekeningBaru">Nomor Rekening Baru</label>
+                            <input type="number" id="nomorRekeningBaru" name="nomorRekeningBaru" required>
+
+                            <button type="submit" class="registerBtn" id="registerBtnPembayaran"
+                                disabled>Update</button>
+                        </form>
+                    </div>
+                </div>
+
+
+                <li>
+                    <span class="material-symbols-outlined" id="notification">
+                        notifications
+                        <span id="notificationBadge" class="badge"></span>
+                    </span>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Notifikasi</h2>
+                                <span class="close">&times;</span>
+                            </div>
+                            <div class="modal-body" id="modal-body">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <span class="material-symbols-outlined" onclick="openModalMobil()" id="mobil">
+                        local_taxi
+                    </span>
+                    <div id="registerModalMobil" class="modalMobil">
+                        <div class="modal-contentMobil">
+                            <span class="closeMobil" onclick="closeModalMobil()">&times;</span>
+                            <h2>Register Mobil</h2>
+                            <form id="registerFormMobil" class="registerForm">
+                                <label for="namaMobil">Nama Mobil</label>
+                                <input type="text" id="namaMobil" name="Nama Mobil" placeholder="Nama Mobil" required>
+
+                                <label for="hargaMobil">Harga Mobil</label>
+                                <input type="number" id="hargaMobil" name="Harga Mobil" placeholder="Harga Mobil"
+                                    required>
+
+                                <label for="noPol">Nomor Polisi</label>
+                                <input type="text" id="noPol" name="Nomor Polisi" placeholder="Nomor Polisi" required>
+
+                                <div class="uploadContainer">
+                                    <div class="uploadCard" onclick="document.getElementById('fileInput').click()">
+                                        <img class="uploadIcon" src="../../src/drop icon.png" alt="Upload"
+                                            id="uploadIcon">
+                                        <input type="file" id="fileInput" accept=".jpg, .jpeg, .png" required
+                                            style="display: none;" />
+                                    </div>
+                                </div>
+                                <p class="infoUpload" id="textInfo">
+                                    Upload Gambar <br> Mobil
+                                </p>
+
+                                <button type="submit" class="registerBtn" id="submitMobil" disabled>Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+            <div class="dropdown">
+                <button class="login-btn" id="btnUser"></button>
+                <div id="dropdownMenu" class="dropdown-content">
+                    <button id="btnLogout">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="dashboardBtn" id="dashboardBtn">
+            <button type="button" class="btn btn-secondary" id="pendingBtn">Pending</button>
+            <button type="button" class="btn btn-secondary" id="prosesBtn">Proses</button>
+            <button type="button" class="btn btn-secondary" id="suksesBtn">Sukses</button>
+            <button type="button" class="btn btn-secondary" id="rejectBtn">Reject</button>
+            <button type="button" class="btn btn-secondary" id="userBtn">User</button>
+        </div>
+    </div>
+
+    <!-- Bagian Page untuk One Page -->
+    <div id="pendingPage" class="page-content" style="display: none;">
+    </div>
+
+    <div id="prosesPage" class="page-contentProses" style="display: none;">
+        <table id="proses" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Tanggal Submit</th>
+                    <th>Tanggal Disetujui</th>
+                    <th>Kode Pesanan</th>
+                    <th>No Telp</th>
+                    <th>Bukti</th>
+                    <th>Alamat</th>
+                    <th>Kota</th>
+                    <th>Tanggal Setoran</th>
+                    <th>Harga</th>
+                    <th>Mobil</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="suksesPage" class="page-contentSukses" style="display: none;">
+        <table id="sukses" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Tanggal Submit</th>
+                    <th>Tanggal Disetujui</th>
+                    <th>Kode Pesanan</th>
+                    <th>No Telp</th>
+                    <th>Bukti</th>
+                    <th>Alamat</th>
+                    <th>Kota</th>
+                    <th>Tanggal Setoran</th>
+                    <th>Harga</th>
+                    <th>Mobil</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="rejectPage" class="page-contentReject" style="display: none;">
+        <table id="reject" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>User</th>
+                    <th>Tanggal Submit</th>
+                    <th>Kode Pesanan</th>
+                    <th>No Telp</th>
+                    <th>Bukti</th>
+                    <th>Alamat</th>
+                    <th>Kota</th>
+                    <th>Tanggal Setoran</th>
+                    <th>Harga</th>
+                    <th>Mobil</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="userPage" class="page-contentUser" style="display: none;">
+        <table id="tableUser" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>User</th>
+                    <th>No Telp</th>
+                    <th>Alamat</th>
+                    <th>Kota</th>
+                    <th>Mobil</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="buktiModal" tabindex="-1" aria-labelledby="buktiModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buktiModalLabel">Bukti Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="buktiImage" src="" alt="Bukti Pembayaran" class="img-fluid">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmationPopup" class="popup">
+        <p>Apakah anda yakin ingin logout?</p>
+        <button class="confirmBtn" onclick="confirmLogout(true)">Iya</button>
+        <button class="confirmBtn" onclick="confirmLogout(false)">Tidak</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.bootstrap5.js"></script>
+
+    <script>
+        function showPage(pageId, buttonId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.style.display = 'none';
+            });
+
+            // Menampilkan halaman yang dipilih
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.style.display = 'block';
+            }
+
+            // Mengatur styling tombol
+            const buttons = document.querySelectorAll('.dashboardBtn .btn');
+            buttons.forEach(button => {
+                button.style.backgroundColor = '';
+                button.style.color = '';
+            });
+
+            // Menandai tombol yang aktif
+            const activeButton = document.getElementById(buttonId);
+            if (activeButton) {
+                activeButton.style.backgroundColor = 'white';
+                activeButton.style.color = 'black';
+            }
+
+            const prosesPage = document.getElementById('prosesPage');
+            const prosesTable = document.getElementById('proses');
+            if (prosesPage && prosesTable) {
+                if (pageId === 'prosesPage') {
+                    prosesPage.style.display = 'block';
+                    prosesTable.style.display = 'table';
+                    new DataTable('#proses');
+                } else {
+                    prosesPage.style.display = 'none';
+                    prosesTable.style.display = 'none';
+                }
+            }
+            // Menampilkan atau menyembunyikan tabel di halaman 'suksesPage' jika ada
+            const suksesPage = document.getElementById('suksesPage');
+            const suksesTable = document.getElementById('sukses');
+            if (suksesPage && suksesTable) {
+                if (pageId === 'suksesPage') {
+                    suksesPage.style.display = 'block';
+                    suksesTable.style.display = 'table';
+                    new DataTable('#sukses');
+                } else {
+                    suksesPage.style.display = 'none';
+                    suksesTable.style.display = 'none';
+                }
+            }
+
+            // Menampilkan atau menyembunyikan tabel di halaman 'rejectPage' jika ada
+            const rejectPage = document.getElementById('rejectPage');
+            const rejectTable = document.getElementById('reject');
+            if (rejectPage && rejectTable) {
+                if (pageId === 'rejectPage') {
+                    rejectPage.style.display = 'block';
+                    rejectTable.style.display = 'table';
+                    new DataTable('#reject');
+                } else {
+                    rejectPage.style.display = 'none';
+                    rejectTable.style.display = 'none';
+                }
+            }
+            const userPage = document.getElementById('userPage');
+            const userTable = document.getElementById('tableUser');
+            if (userPage && userTable) {
+                if (pageId === 'userPage') {
+                    userPage.style.display = 'block';
+                    userTable.style.display = 'table';
+                    new DataTable('#tableUser');
+                } else {
+                    userPage.style.display = 'none';
+                    userTable.style.display = 'none';
+                }
+            }
+
+        }
+
+
+        // Menghubungkan tombol dengan fungsi showPage saat tombol diklik
+        document.getElementById('pendingBtn').addEventListener('click', () => showPage('pendingPage', 'pendingBtn'));
+        document.getElementById('prosesBtn').addEventListener('click', () => showPage('prosesPage', 'prosesBtn'));
+        document.getElementById('suksesBtn').addEventListener('click', () => showPage('suksesPage', 'suksesBtn'));
+        document.getElementById('rejectBtn').addEventListener('click', () => showPage('rejectPage', 'rejectBtn'));
+        document.getElementById('userBtn').addEventListener('click', () => showPage('userPage', 'userBtn'));
+
+        window.onload = function () {
+            showPage('pendingPage', 'pendingBtn');
+            updateButtonText();
+
+            window.addEventListener('popstate', function (event) {
+                document.getElementById('confirmationPopup').style.display = 'block';
+                history.pushState(null, null, location.href); 
+            });
+
+            history.pushState(null, null, location.href);
+
+            function updateTransactionData(updatedData) {
+                fetch('update_transaksi.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedData)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Transaction data updated:', data.message);
+                    })
+                    .catch(error => console.error('Error updating transaction data:', error));
+            }
+
+            fetch('fetch_transaksi.php')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Transaction data fetched:', data);
+                    const currentDate = new Date().toLocaleDateString();
+                    let updatedTransactions = [];
+
+                    data.forEach(transaction => {
+                        if (transaction.status === 'Diproses' && transaction.disetujui) {
+                            const disetujuiDate = new Date(transaction.disetujui);
+                            if (new Date(currentDate) > disetujuiDate) { 
+                                transaction.status = 'Sukses'; 
+                                updatedTransactions.push(transaction); 
+                            }
+                        }
+                    });
+
+                    if (updatedTransactions.length > 0) {
+                        updateTransactionData(updatedTransactions);
+                    }
+                })
+                .catch(error => console.error('Error fetching transaction data:', error));
+        };
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const pendingPage = document.getElementById('pendingPage');
+
+            fetch('fetch_dataPending.php')
+                .then(response => response.text())
+                .then(data => {
+                    updateButtonText();
+                    if (data.trim() === "") {
+                        pendingPage.innerHTML = "Belum ada Data Pending";
+                    } else {
+                        pendingPage.innerHTML = data;
+                        pendingPage.style.display = 'block';
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+
+
+        function saveDataAndRedirect(idTransaksi) {
+            sessionStorage.setItem('selectedTransaksi', idTransaksi);
+
+            window.location.href = 'proses.html';
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            function fetchProsesData() {
+                fetch('fetch_dataProses.php')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.querySelector("#proses tbody").innerHTML = html;
+                        new DataTable('#proses');
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+            window.showImageModal = function (imageSrc) {
+                const modalImage = document.getElementById('buktiImage');
+                modalImage.src = '../' + imageSrc;
+                const modal = new bootstrap.Modal(document.getElementById('buktiModal'));
+                modal.show();
+            };
+
+            // Fungsi Close
+            const buktiModalElement = document.getElementById('buktiModal');
+            buktiModalElement.addEventListener('hidden.bs.modal', function () {
+                document.body.classList.remove('modal-open');
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+            });
+
+            fetchProsesData();
+        });
+
+        function prosesCek(idTransaksi) {
+            sessionStorage.setItem('selectedTransaksi', idTransaksi);
+            window.location.href = 'proses.html';
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            function fetchSuksesData() {
+                fetch('fetch_dataSukses.php')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.querySelector("#sukses tbody").innerHTML = html;
+                        new DataTable('#sukses');
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+            window.showImageModal = function (imageSrc) {
+                const modalImage = document.getElementById('buktiImage');
+                modalImage.src = '../' + imageSrc;
+                const modal = new bootstrap.Modal(document.getElementById('buktiModal'));
+                modal.show();
+            };
+
+            // Fungsi Close
+            const buktiModalElement = document.getElementById('buktiModal');
+            buktiModalElement.addEventListener('hidden.bs.modal', function () {
+                document.body.classList.remove('modal-open');
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+            });
+
+            fetchSuksesData();
+        });
+
+        function suksesCek(idTransaksi) {
+            sessionStorage.setItem('selectedTransaksi', idTransaksi);
+            window.location.href = 'proses.html';
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            function fetchRejectData() {
+                fetch('fetch_dataReject.php')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.querySelector("#reject tbody").innerHTML = html;
+                        new DataTable('#reject');
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+
+            // Fungsi Menampilkan modal gambar
+            window.showImageModal = function (imageSrc) {
+                const modalImage = document.getElementById('buktiImage');
+                modalImage.src = '../' + imageSrc;
+                const modal = new bootstrap.Modal(document.getElementById('buktiModal'));
+                modal.show();
+            };
+
+            // Fungsi Close
+            const buktiModalElement = document.getElementById('buktiModal');
+            buktiModalElement.addEventListener('hidden.bs.modal', function () {
+                document.body.classList.remove('modal-open');
+                const backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    backdrop.remove();
+                }
+            });
+
+            fetchRejectData();
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            function fetchUserData() {
+                fetch('fetch_dataUser.php')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.querySelector("#tableUser tbody").innerHTML = html;
+                        new DataTable('#tableUser');
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+            fetchUserData();
+        });
+
+        function userCek(user) {
+            sessionStorage.setItem('selectedTransaksi', user);
+            window.location.href = 'prosesUser.html';
+        }
+
+        // Logika Modal Notifikasi
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateButtonText();
+            fetch('update_transactions.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        console.log(data.message);
+                    } else {
+                        console.error(data.message);
+                    }
+                })
+                .catch(error => console.error('Error updating transactions:', error));
+        });
+
+        document.getElementById('notification').addEventListener('click', openModal);
+
+        function openModal() {
+            document.getElementById('modal-body').innerHTML = "<p>Loading...</p>";
+            document.getElementById('myModal').style.display = 'block';
+
+            fetch('../data/transaksi.json')
+                .then(response => response.json())
+                .then(data => {
+                    let content = '';
+                    if (Array.isArray(data) && data.length > 0) {
+                        data.forEach(transaction => {
+                            if (transaction.status === "Accept") {
+                                content += "<p>Ada uang masuk sebesar " + transaction.totalBayar + " dari " + transaction.nama + "</p>";
+                            }
+                        });
+                        if (content === '') {
+                            content = "<p>Tidak ada transaksi dengan status 'Accept'.</p>";
+                        }
+                    } else {
+                        content = "<p>Data transaksi masih kosong.</p>";
+                    }
+                    document.getElementById('modal-body').innerHTML = content;
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('modal-body').innerHTML = "<p>Error loading data.</p>";
+                });
+        }
+
+        document.querySelector('.close').onclick = function () {
+            document.getElementById('myModal').style.display = 'none';
+        };
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+
+        // Logika Modal User
+        function openModalUser() {
+            document.getElementById('registerModalUser').style.display = 'block';
+            loadMobilData();
+        }
+
+        function closeModalUser() {
+            document.getElementById('registerModalUser').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('registerModalUser')) {
+                closeModalUser();
+            }
+        }
+
+        function loadMobilData() {
+            const mobilSelect = document.getElementById('mobil');
+            fetch('../data/mobil.json', {
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            })
+                .then(response => response.json())
+                .then(mobilData => {
+                    mobilSelect.innerHTML = '';
+
+                    mobilData.forEach(car => {
+                        if (car.status === 'Tersedia') {
+                            const option = document.createElement('option');
+                            option.value = car.idMobil;
+                            option.textContent = car.namaMobil;
+                            mobilSelect.appendChild(option);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading car data:', error.message);
+                    alert('Failed to load car data. Please try again later.');
+                });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const mobilSelect = document.getElementById('mobil');
+            const registerForm = document.getElementById('registerFormUser');
+            const registUserBtn = document.getElementById('registUserBtn');
+            const usernameInput = document.getElementById('usernameUser');
+            const passwordInput = document.getElementById('passwordUser');
+            const noTelpInput = document.getElementById('noTelpUser');
+            const alamatInput = document.getElementById('alamatUser');
+            const kotaInput = document.getElementById('kotaUser');
+
+            function checkFormValidity() {
+                const isFormValid = usernameInput.value.trim() !== '' &&
+                    passwordInput.value.trim() !== '' &&
+                    mobilSelect.value !== '' &&
+                    noTelpInput.value.trim() !== '' &&
+                    alamatInput.value.trim() !== '' &&
+                    kotaInput.value.trim() !== '';
+                registUserBtn.disabled = !isFormValid;
+            }
+
+            usernameInput.addEventListener('input', checkFormValidity);
+            passwordInput.addEventListener('input', checkFormValidity);
+            mobilSelect.addEventListener('change', checkFormValidity);
+            noTelpInput.addEventListener('input', checkFormValidity);
+            alamatInput.addEventListener('input', checkFormValidity);
+            kotaInput.addEventListener('input', checkFormValidity);
+
+            registerForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+                const noTelp = noTelpInput.value;
+                const alamat = alamatInput.value;
+                const kota = kotaInput.value;
+                const selectedMobil = mobilSelect.value;
+
+
+                if (username && password && selectedMobil) {
+                    fetch('get_last_user_id.php')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            const newIdUser = data.lastIdUser + 1;
+
+                            const userData = {
+                                idUser: newIdUser,
+                                username: username,
+                                password: password,
+                                noTelp: noTelp,
+                                alamat: alamat,
+                                kota: kota,
+                                mobil: selectedMobil,
+                                dibuat: new Date().toLocaleString()
+                            };
+
+                            return fetch('register_user.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(userData)
+                            });
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                return fetch('update_mobil_status.php', { // Updated path
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ idMobil: selectedMobil, status: 'Terpakai' })
+                                });
+                            } else {
+                                throw new Error(data.message || 'An unknown error occurred');
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(statusUpdateData => {
+                            if (statusUpdateData.status === 'success') {
+                                alert('User registered successfully!');
+                                closeModalUser();
+                                registerForm.reset();
+                                checkFormValidity();
+                            } else {
+                                throw new Error('Error updating mobil status: ' + statusUpdateData.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error during registration:', error.message);
+                            console.error('Full error details:', error);
+                            alert('There was a problem with registration. Please try again.');
+                        });
+                } else {
+                    alert('Please fill out all fields.');
+                }
+            });
+        });
+
+
+        // Logika Modal Admin
+
+        function openModalAdmin() {
+            document.getElementById('registerModalAdmin').style.display = 'block';
+        }
+
+        function closeModalAdmin() {
+            document.getElementById('registerModalAdmin').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('registerModalAdmin')) {
+                closeModalAdmin();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const registerForm = document.getElementById('registerFormAdmin');
+            const usernameInput = document.getElementById('usernameAdmin');
+            const passwordInput = document.getElementById('passwordAdmin');
+            const registerBtnAdmin = document.getElementById('registerBtnAdmin');
+
+            function checkFormValidity() {
+                const isFormValid = usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '';
+                registerBtnAdmin.disabled = !isFormValid;
+            }
+
+            usernameInput.addEventListener('input', checkFormValidity);
+            passwordInput.addEventListener('input', checkFormValidity);
+
+            registerForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+
+                if (username && password) {
+                    fetch('get_last_admin_id.php')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            const lastIdAdmin = data.lastIdAdmin || 0;
+                            const newIdAdmin = lastIdAdmin + 1;
+
+                            const adminDataToSend = {
+                                idAdmin: newIdAdmin.toString(),
+                                username: username,
+                                password: password
+                            };
+
+                            return fetch('register_admin.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(adminDataToSend)
+                            });
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                alert('Admin registered successfully!');
+                                closeModalAdmin();
+                                registerForm.reset();
+                                checkFormValidity();
+                            } else {
+                                throw new Error(data.message || 'An unknown error occurred');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error during registration:', error.message);
+                            console.error('Full error details:', error);
+                            alert('There was a problem with registration. Please try again.');
+                        });
+                } else {
+                    alert('Please fill out all fields.');
+                }
+            });
+        });
+
+        // Modal Pembayaran
+
+        function openModalPembayaran() {
+            const modal = document.getElementById("registerModalPembayaran");
+            modal.style.display = "block";
+
+            fetchRekeningData();
+        }
+
+        function closeModalPembayaran() {
+            document.getElementById("registerModalPembayaran").style.display = "none";
+        }
+
+        function fetchRekeningData() {
+
+            fetch('getRekening.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById('nomorRekeningSekarang').textContent = data.rekening;
+                    } else {
+                        console.error('Error fetching rekening data:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error fetching rekening data:', error));
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('registerModalPembayaran')) {
+                closeModalPembayaran();
+            }
+        }
+
+        const nomorRekeningBaruInput = document.getElementById('nomorRekeningBaru');
+        const registerBtnPembayaran = document.getElementById('registerBtnPembayaran');
+
+        nomorRekeningBaruInput.addEventListener('input', function () {
+            if (nomorRekeningBaruInput.value.trim() !== '') {
+                registerBtnPembayaran.disabled = false;
+            } else {
+                registerBtnPembayaran.disabled = true;
+            }
+        });
+
+        document.getElementById('registerFormPembayaran').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+
+            const newRekening = nomorRekeningBaruInput.value.trim();
+
+            fetch('updateRekening.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'nomorRekeningBaru': newRekening
+                })
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        alert(result.message);
+                        fetchRekeningData();
+                        closeModalPembayaran();
+                        nomorRekeningBaruInput.value = '';
+                        registerBtnPembayaran.disabled = true;
+                    } else {
+                        alert(result.message);
+                    }
+                })
+                .catch(error => console.error('Error updating rekening data:', error));
+        });
+
+
+
+        // Modal Mobil
+
+        function openModalMobil() {
+
+            document.getElementById('registerModalMobil').style.display = 'block';
+        }
+
+        function closeModalMobil() {
+            document.getElementById('registerModalMobil').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('registerModalMobil')) {
+                closeModalMobil();
+            }
+        }
+
+        //Handle Logika Modal Mobil
+        document.addEventListener("DOMContentLoaded", function () {
+            const namaMobilInput = document.getElementById("namaMobil");
+            const hargaMobilInput = document.getElementById("hargaMobil");
+            const noPolInput = document.getElementById("noPol");
+            const fileInput = document.getElementById("fileInput");
+            const submitMobilBtn = document.getElementById("submitMobil");
+            const uploadIcon = document.getElementById("uploadIcon");
+
+            function checkFormValidity() {
+                if (
+                    namaMobilInput.value.trim() &&
+                    hargaMobilInput.value.trim() &&
+                    noPolInput.value.trim() &&
+                    fileInput.files.length > 0
+                ) {
+                    submitMobilBtn.disabled = false;
+                } else {
+                    submitMobilBtn.disabled = true;
+                }
+            }
+
+            [namaMobilInput, hargaMobilInput, noPolInput, fileInput].forEach(input => {
+                input.addEventListener("input", checkFormValidity);
+            });
+
+            fileInput.addEventListener("change", function () {
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        uploadIcon.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            });
+
+            document.getElementById("registerFormMobil").addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const formData = new FormData();
+                formData.append("namaMobil", namaMobilInput.value);
+                formData.append("hargaMobil", parseInt(hargaMobilInput.value));
+                formData.append("noPol", noPolInput.value);
+                formData.append("gambar", fileInput.files[0]);
+
+                fetch('submit_mobil.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if (data.success) {
+                            document.getElementById("registerFormMobil").reset();
+                            submitMobilBtn.disabled = true;
+                            uploadIcon.src = "../../src/drop icon.png";
+                            alert(data.message);
+                            location.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Terjadi kesalahan saat mengirim data.");
+                    });
+            });
+        });
+
+
+
+        function updateButtonText() {
+            const btnUser = document.getElementById("btnUser");
+            const user = JSON.parse(sessionStorage.getItem("loggedInAdmin"));
+
+            if (user && user.username) {
+                btnUser.textContent = "Hi, " + user.username + "!";
+            } else {
+                alert("Anda Perlu Login, Silahkan Login Kembali!");
+                window.location.href = "../logAdmin.html";
+                sessionStorage.clear();
+            }
+        }
+
+        document.getElementById("btnUser").addEventListener("click", function () {
+            const dropdownMenu = document.getElementById("dropdownMenu");
+            dropdownMenu.classList.toggle("show");
+        });
+
+
+        document
+            .getElementById("btnLogout")
+            .addEventListener("click", function () {
+                document.getElementById("confirmationPopup").style.display = "block";
+            });
+
+        function confirmLogout(confirmed) {
+            if (confirmed) {
+                sessionStorage.removeItem("loggedInAdmin");
+                window.location.href = "../logAdmin.html";
+            } else {
+                document.getElementById("confirmationPopup").style.display = "none";
+            }
+        }
+        window.onclick = function (event) {
+            if (!event.target.matches("#btnUser")) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains("show")) {
+                        openDropdown.classList.remove("show");
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- <footer class="site-footer">
+    <div class="containerFooter">
+        <div class="row" style="display: flex;">
+            <div>
+                <h6>Company</h6>
+                <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+            </div>
+            <div>
+                <h6>Social</h6>
+                <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+            </div>
+        </div>
+        <div>
+            <h6>Legal</h6>
+            <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+        </div>
+        <hr>
+        <div class="footerContainer">
+            <div class="row">
+                <div>
+                    <p class="copyright-text">PT. SUKSES JAYA TRANSPORINDO</p>
+                </div>
+            </div>
+        </div>
+</footer> -->
+</body>
+
+
+
+</html>

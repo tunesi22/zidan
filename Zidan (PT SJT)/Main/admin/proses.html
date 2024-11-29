@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SJT</title>
+    <link rel="stylesheet" href="../styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="proses.css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../../src/logo.png" alt="Logo" />
+            </div>
+            <ul class="nav-links">
+
+                <li><a class="textHeader" href="dashboard.html">Dashboard</a></li>
+                <li><a class="textHeader" onclick="openModalUser()">Buat User</a></li>
+                <div id="registerModalUser" class="modalUser">
+                    <div class="modal-contentUser">
+                        <span class="closeUser" onclick="closeModalUser()">&times;</span>
+                        <h2>Register User</h2>
+                        <form id="registerFormUser" class="registerForm">
+                            <label for="username">Username</label>
+                            <input type="text" id="usernameUser" name="username" required>
+
+                            <label for="password">Password</label>
+                            <input type="password" id="passwordUser" name="password" required>
+
+                            <label for="noTelp">No Telp</label>
+                            <input type="number" id="noTelpUser" name="noTelp" required>
+
+                            <label for="alamat">Alamat</label>
+                            <input type="text" id="alamatUser" name="alamat" required>
+
+                            <label for="kota">Kota</label>
+                            <input type="text" id="kotaUser" name="kota" required>
+
+                            <label for="mobil">Mobil</label>
+                            <select id="mobil" name="mobil">
+                            </select>
+
+                            <button type="submit" class="registerBtn" id="registUserBtn" disabled>Register</button>
+                        </form>
+                    </div>
+                </div>
+
+                <li><a class="textHeader" onclick="openModalAdmin()">Buat Admin</a></li>
+                <div id="registerModalAdmin" class="modalAdmin">
+                    <div class="modal-contentAdmin">
+                        <span class="closeAdmin" onclick="closeModalAdmin()">&times;</span>
+                        <h2>Register Admin</h2>
+                        <form id="registerFormAdmin" class="registerForm">
+                            <label for="username">Username</label>
+                            <input type="text" id="usernameAdmin" name="username" required>
+
+                            <label for="password">Password</label>
+                            <input type="password" id="passwordAdmin" name="password" required>
+
+                            <button type="submit" class="registerBtn" id="registerBtnAdmin" disabled>Register</button>
+                        </form>
+                    </div>
+                </div>
+
+                <li><a class="textHeader" onclick="openModalPembayaran()">Edit Pembayaran</a></li>
+                <div id="registerModalPembayaran" class="modalPembayaran">
+                    <div class="modal-contentPembayaran">
+                        <span class="closePembayaran" onclick="closeModalPembayaran()">&times;</span>
+                        <h2>Edit Pembayaran</h2>
+                        <form id="registerFormPembayaran" class="registerForm">
+                            <label for="nomorRekeningSekarang">Nomor Rekening Sekarang</label>
+                            <p id="nomorRekeningSekarang"></p>
+
+                            <label for="nomorRekeningBaru">Nomor Rekening Baru</label>
+                            <input type="number" id="nomorRekeningBaru" name="nomorRekeningBaru" required>
+
+                            <button type="submit" class="registerBtn" id="registerBtnPembayaran"
+                                disabled>Update</button>
+                        </form>
+                    </div>
+                </div>
+
+
+                <li>
+                    <span class="material-symbols-outlined" id="notification">
+                        notifications
+                    </span>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Notifikasi</h2>
+                                <span class="close">&times;</span>
+                            </div>
+                            <div class="modal-body" id="modal-body">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <span class="material-symbols-outlined" onclick="openModalMobil()" id="mobil">
+                        local_taxi
+                    </span>
+                    <div id="registerModalMobil" class="modalMobil">
+                        <div class="modal-contentMobil">
+                            <span class="closeMobil" onclick="closeModalMobil()">&times;</span>
+                            <h2>Register Mobil</h2>
+                            <form id="registerFormMobil" class="registerForm">
+                                <label for="namaMobil">Nama Mobil</label>
+                                <input type="text" id="namaMobil" name="Nama Mobil" placeholder="Nama Mobil" required>
+
+                                <label for="hargaMobil">Harga Mobil</label>
+                                <input type="number" id="hargaMobil" name="Harga Mobil" placeholder="Harga Mobil"
+                                    required>
+
+                                <label for="noPol">Nomor Polisi</label>
+                                <input type="text" id="noPol" name="Nomor Polisi" placeholder="Nomor Polisi" required>
+
+                                <div class="uploadContainer">
+                                    <div class="uploadCard" onclick="document.getElementById('fileInput').click()">
+                                        <img class="uploadIcon" id="uploadIcon" src="../../src/drop icon.png"
+                                            alt="Upload">
+                                        <input type="file" id="fileInput" accept=".jpg, .jpeg, .png" required
+                                            style="display: none;" />
+                                    </div>
+                                </div>
+                                <p class="infoUpload" id="textInfo">
+                                    Upload Gambar <br> Mobil
+                                </p>
+
+                                <button type="submit" class="registerBtn" id="submitMobil" disabled>Register</button>
+                            </form>
+                            <div id="loader" style="display:none;">Loading...</div>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+            <div class="dropdown">
+                <button class="login-btn" id="btnUser"></button>
+                <div id="dropdownMenu" class="dropdown-content">
+                    <button id="btnLogout">Logout</button>
+                </div>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="containerWrap">
+        <div class="container">
+            <strong style="width: 200px;">Tampilan Data User</strong>
+            <div class="separator">
+                <p class="tanggalBulan"></p>
+                <div class="cardProfile">
+                    <div class="leftContent">
+                        <div class="isiContentLeft">
+                            <a href="#" class="namaUser">Username</a>
+                            <a href="#" class="jenisNamaMobil">Jenis Nama Mobil</a>
+                            <a href="#" class="kodePesanan">Kode Pesanan :</a>
+                            <a href="#" class="statusMobil">Status :</a>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <a id="buktiPembayaran" style="color: blue; text-decoration: underline;"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapMobilCard">
+            <div class="cardMobil">
+                <div class="mobilImg">
+                </div>
+            </div>
+            <div class="cardInfoMobil">
+                <div class="infoMobil">
+                    <p class="kota">KOTA</p>
+                </div>
+                <div class="border"></div>
+                <div class="infoJarak">
+                    <b>Jarak Tempuh</b>
+                    <p class="textInfoJarak">Jarak tempuh maksimal yang diperbolehkan adalah 400km per hari. Penggunaan
+                        yang melebihi batasan
+                        akan tersebut akan dikenakan sebesar Rp.1,500 per km</p>
+                </div>
+                <div class="contentJarak">
+                    <p class="tanggalJarak" id="tanggalMulai">00-00-0000</p>
+                    <span class="material-symbols-outlined" id="arrow">chevron_right</span>
+                    <p class="tanggalJarak" id="tanggalSelesai">00-00-0000</p>
+                </div>
+                <div class="hargaJarak">
+                    <p id="hariJarak"></p>
+                    <p id="hargaJarak"></p>
+                </div>
+                <div class="resultBtn" id="resultBtn">
+
+                </div>
+            </div>
+            <div id="btnDecision">
+                <button type="button" class="btn btn-secondary" id="btnReject">Reject</button>
+                <button type="button" class="btn btn-secondary" id="btnAccept">Accept</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!--Bagian Loader-->
+    <div id="loaderPopup" class="popup">
+        <p>Mohon tunggu...</p>
+    </div>
+
+    <div id="confirmationPopup" class="popup">
+        <p>Apakah anda yakin ingin logout?</p>
+        <button class="confirmBtn" onclick="confirmLogout(true)">Iya</button>
+        <button class="confirmBtn" onclick="confirmLogout(false)">Tidak</button>
+    </div>
+
+    <div class="modal fade" id="buktiPembayaranModal" tabindex="-1" aria-labelledby="buktiPembayaranModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buktiPembayaranModalLabel">Bukti Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="" id="buktiPembayaranImage" class="img-fluid" alt="Bukti Pembayaran">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const btnAccept = document.getElementById('btnAccept');
+            const btnReject = document.getElementById('btnReject');
+
+            const hamburger = document.getElementById("hamburger");
+            const navLinks = document.querySelector(".nav-links");
+
+            hamburger.addEventListener("click", () => {
+                navLinks.classList.toggle("active");
+            });
+
+            const idTransaksi = sessionStorage.getItem("selectedTransaksi");
+
+            if (!idTransaksi) {
+                console.error("No selected transaction found in sessionStorage.");
+                return;
+            }
+
+            let transaksi;
+
+            fetch(`fetch_halamanProses.php?idTransaksi=${idTransaksi}`)
+                .then(response => response.json())
+                .then(transactions => {
+                    if (transactions.length > 0) {
+                        transaksi = transactions[0];
+
+                        fetch('../data/mobil.json')
+                            .then(response => response.json())
+                            .then(mobilData => {
+                                const matchingMobil = mobilData.find(mobil => mobil.idMobil === transaksi.mobil);
+
+                                if (matchingMobil) {
+                                    document.querySelector('.namaUser').textContent = transaksi.nama;
+                                    document.querySelector('.jenisNamaMobil').textContent = matchingMobil.namaMobil;
+                                    document.querySelector('.kodePesanan').textContent = "Kode Pesanan: " + transaksi.idTransaksi;
+                                    document.querySelector('.statusMobil').textContent = "Status: " + transaksi.status;
+
+                                    const buktiPembayaranLink = document.getElementById('buktiPembayaran');
+                                    if (transaksi.bukti) {
+                                        buktiPembayaranLink.textContent = 'Lihat Bukti Pembayaran';
+                                        buktiPembayaranLink.href = '#';
+                                        buktiPembayaranLink.setAttribute('data-bs-toggle', 'modal');
+                                        buktiPembayaranLink.setAttribute('data-bs-target', '#buktiPembayaranModal');
+                                    } else {
+                                        buktiPembayaranLink.textContent = 'Tidak ada bukti pembayaran';
+                                        buktiPembayaranLink.removeAttribute('href');
+                                        buktiPembayaranLink.removeAttribute('data-bs-toggle');
+                                        buktiPembayaranLink.removeAttribute('data-bs-target');
+                                    }
+
+                                    // Set Mobil Image
+                                    const mobilImg = document.querySelector('.mobilImg');
+                                    const carImage = document.createElement('img');
+                                    carImage.src = matchingMobil.gambar;
+                                    carImage.alt = matchingMobil.namaMobil;
+                                    carImage.style.width = '100%';
+                                    carImage.style.height = '220px';
+                                    mobilImg.appendChild(carImage);
+
+                                    // Set Tanggal Dari dan Tanggal Selesai
+                                    let [start, end] = transaksi.tanggal.split(' / ');
+
+                                    document.getElementById('tanggalMulai').textContent = start;
+                                    document.getElementById('tanggalSelesai').textContent = end;
+                                    // Set Hari Jarak dan Harga Jarak
+                                    document.getElementById('hariJarak').textContent = `${transaksi.banyakHari} Hari`;
+                                    document.getElementById('hargaJarak').textContent = `Rp. ${transaksi.totalBayar.toLocaleString()}`;
+
+
+                                    if (transaksi.status === "Belum Diproses") {
+                                        btnAccept.style.display = 'block';
+                                        btnReject.style.display = 'block';
+                                    } else if (transaksi.status === "Reject") {
+                                        btnReject.style.display = 'none';
+                                        btnAccept.style.display = 'block';
+                                    }
+                                    else if (transaksi.status === "Diproses") {
+                                        btnReject.style.display = 'block';
+                                        btnAccept.style.display = 'none';
+                                    }
+                                    else {
+                                        hideButtons();
+                                    }
+                                } else {
+                                    console.error("No matching car found.");
+                                }
+                            })
+                            .catch(error => console.error('Error fetching car data:', error));
+                    }
+                })
+                .catch(error => console.error('Error fetching transaction data:', error));
+
+            document.addEventListener('click', function (event) {
+                if (event.target.matches('[data-bs-target="#buktiPembayaranModal"]')) {
+                    const buktiPembayaranImage = document.getElementById('buktiPembayaranImage');
+                    buktiPembayaranImage.src = "../" + transaksi.bukti;
+                }
+            });
+
+            btnAccept.addEventListener('click', function () {
+                const currentTimestamp = new Date().toLocaleDateString();
+                updateStatus(idTransaksi, "Diproses", "<a href='#'>Pantau</a>", currentTimestamp);
+            });
+
+            btnReject.addEventListener('click', function () {
+                updateStatus(idTransaksi, "Reject", "<p>Permintaan telah di Tolak</p>");
+            });
+
+            function updateStatus(idTransaksi, status, additionalContent, disetujui = null) {
+                let bodyData = `idTransaksi=${idTransaksi}&status=${status}`;
+
+                if (disetujui) {
+                    bodyData += `&disetujui=${disetujui}`;
+                }
+
+                fetch('update_halamanProses.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: bodyData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message);
+                        document.querySelector('.statusMobil').innerHTML = "Status: " + status;
+                        document.getElementById('resultBtn').innerHTML = additionalContent;
+                        hideButtons();
+                        sessionStorage.removeItem("selectedTransaksi");
+                    })
+                    .catch(error => console.error('Error updating status:', error));
+            }
+
+            function hideButtons() {
+                document.getElementById('btnAccept').style.display = 'none';
+                document.getElementById('btnReject').style.display = 'none';
+            }
+        });
+
+
+        var modal = document.getElementById("myModal");
+        var spanNotif = document.getElementById("notification");
+        var span = document.getElementsByClassName("close")[0];
+
+        spanNotif.onclick = function () {
+            modal.style.display = "block";
+        };
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        window.onload = function () {
+            updateButtonText();
+        };
+
+        // Logika Modal User
+        function openModalUser() {
+            document.getElementById('registerModalUser').style.display = 'block';
+            loadMobilData();
+        }
+
+        function closeModalUser() {
+            document.getElementById('registerModalUser').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('registerModalUser')) {
+                closeModalUser();
+            }
+        }
+
+        function loadMobilData() {
+            updateButtonText();
+            const mobilSelect = document.getElementById('mobil');
+            fetch('../data/mobil.json', {
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            })
+                .then(response => response.json())
+                .then(mobilData => {
+                    mobilSelect.innerHTML = '';
+
+                    mobilData.forEach(car => {
+                        if (car.status === 'Tersedia') {
+                            const option = document.createElement('option');
+                            option.value = car.idMobil;
+                            option.textContent = car.namaMobil;
+                            mobilSelect.appendChild(option);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error loading car data:', error.message);
+                    alert('Failed to load car data. Please try again later.');
+                });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateButtonText();
+            const mobilSelect = document.getElementById('mobil');
+            const registerForm = document.getElementById('registerFormUser');
+            const registUserBtn = document.getElementById('registUserBtn');
+            const usernameInput = document.getElementById('usernameUser');
+            const passwordInput = document.getElementById('passwordUser');
+            const noTelpInput = document.getElementById('noTelpUser');
+            const alamatInput = document.getElementById('alamatUser');
+            const kotaInput = document.getElementById('kotaUser');
+
+            function checkFormValidity() {
+                const isFormValid = usernameInput.value.trim() !== '' &&
+                    passwordInput.value.trim() !== '' &&
+                    mobilSelect.value !== '' &&
+                    noTelpInput.value.trim() !== '' &&
+                    alamatInput.value.trim() !== '' &&
+                    kotaInput.value.trim() !== '';
+                registUserBtn.disabled = !isFormValid;
+            }
+
+            usernameInput.addEventListener('input', checkFormValidity);
+            passwordInput.addEventListener('input', checkFormValidity);
+            mobilSelect.addEventListener('change', checkFormValidity);
+            noTelpInput.addEventListener('input', checkFormValidity);
+            alamatInput.addEventListener('input', checkFormValidity);
+            kotaInput.addEventListener('input', checkFormValidity);
+
+            registerForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+                const noTelp = noTelpInput.value;
+                const alamat = alamatInput.value;
+                const kota = kotaInput.value;
+                const selectedMobil = mobilSelect.value;
+
+
+                if (username && password && selectedMobil) {
+                    fetch('get_last_user_id.php')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            const newIdUser = data.lastIdUser + 1;
+
+                            const userData = {
+                                idUser: newIdUser,
+                                username: username,
+                                password: password,
+                                noTelp: noTelp,
+                                alamat: alamat,
+                                kota: kota,
+                                mobil: selectedMobil,
+                                dibuat: new Date().toLocaleString()
+                            };
+
+                            return fetch('register_user.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(userData)
+                            });
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                return fetch('update_mobil_status.php', { // Updated path
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ idMobil: selectedMobil, status: 'Terpakai' })
+                                });
+                            } else {
+                                throw new Error(data.message || 'An unknown error occurred');
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(statusUpdateData => {
+                            if (statusUpdateData.status === 'success') {
+                                alert('User registered successfully!');
+                                closeModalUser();
+                                registerForm.reset();
+                                checkFormValidity();
+                            } else {
+                                throw new Error('Error updating mobil status: ' + statusUpdateData.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error during registration:', error.message);
+                            console.error('Full error details:', error);
+                            alert('There was a problem with registration. Please try again.');
+                        });
+                } else {
+                    alert('Please fill out all fields.');
+                }
+            });
+        });
+
+
+        // Logika Modal Admin
+
+        function openModalAdmin() {
+            document.getElementById('registerModalAdmin').style.display = 'block';
+        }
+
+        function closeModalAdmin() {
+            document.getElementById('registerModalAdmin').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('registerModalAdmin')) {
+                closeModalAdmin();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateButtonText();
+            const registerForm = document.getElementById('registerFormAdmin');
+            const usernameInput = document.getElementById('usernameAdmin');
+            const passwordInput = document.getElementById('passwordAdmin');
+            const registerBtnAdmin = document.getElementById('registerBtnAdmin');
+
+            function checkFormValidity() {
+                const isFormValid = usernameInput.value.trim() !== '' && passwordInput.value.trim() !== '';
+                registerBtnAdmin.disabled = !isFormValid;
+            }
+
+            usernameInput.addEventListener('input', checkFormValidity);
+            passwordInput.addEventListener('input', checkFormValidity);
+
+            registerForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+
+                if (username && password) {
+                    fetch('get_last_admin_id.php')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            const lastIdAdmin = data.lastIdAdmin || 0;
+                            const newIdAdmin = lastIdAdmin + 1;
+
+                            const adminDataToSend = {
+                                idAdmin: newIdAdmin.toString(),
+                                username: username,
+                                password: password
+                            };
+
+                            return fetch('register_admin.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(adminDataToSend)
+                            });
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                alert('Admin registered successfully!');
+                                closeModalAdmin();
+                                registerForm.reset();
+                                checkFormValidity();
+                            } else {
+                                throw new Error(data.message || 'An unknown error occurred');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error during registration:', error.message);
+                            console.error('Full error details:', error);
+                            alert('There was a problem with registration. Please try again.');
+                        });
+                } else {
+                    alert('Please fill out all fields.');
+                }
+            });
+        });
+
+        // Logika Modal Pembayaran
+
+        function openModalPembayaran() {
+            const modal = document.getElementById("registerModalPembayaran");
+            modal.style.display = "block";
+
+            fetchRekeningData();
+        }
+
+        function closeModalPembayaran() {
+            document.getElementById("registerModalPembayaran").style.display = "none";
+        }
+
+        function fetchRekeningData() {
+            updateButtonText();
+            fetch('getRekening.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        document.getElementById('nomorRekeningSekarang').textContent = data.rekening;
+                    } else {
+                        console.error('Error fetching rekening data:', data.message);
+                    }
+                })
+                .catch(error => console.error('Error fetching rekening data:', error));
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('registerModalPembayaran')) {
+                closeModalPembayaran();
+            }
+        }
+
+        const nomorRekeningBaruInput = document.getElementById('nomorRekeningBaru');
+        const registerBtnPembayaran = document.getElementById('registerBtnPembayaran');
+
+        nomorRekeningBaruInput.addEventListener('input', function () {
+            if (nomorRekeningBaruInput.value.trim() !== '') {
+                registerBtnPembayaran.disabled = false;
+            } else {
+                registerBtnPembayaran.disabled = true;
+            }
+        });
+
+        document.getElementById('registerFormPembayaran').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+
+            const newRekening = nomorRekeningBaruInput.value.trim();
+
+            fetch('updateRekening.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'nomorRekeningBaru': newRekening
+                })
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.status === 'success') {
+                        alert(result.message);
+                        fetchRekeningData();
+                        closeModalPembayaran();
+                        nomorRekeningBaruInput.value = '';
+                        registerBtnPembayaran.disabled = true;
+                    } else {
+                        alert(result.message);
+                    }
+                })
+                .catch(error => console.error('Error updating rekening data:', error));
+        });
+
+        // Modal Notifikasi
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateButtonText();
+            fetch('update_transactions.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        console.log(data.message);
+                    } else {
+                        console.error(data.message);
+                    }
+                })
+                .catch(error => console.error('Error updating transactions:', error));
+        });
+
+        document.getElementById('notification').addEventListener('click', openModal);
+
+        function openModal() {
+            document.getElementById('modal-body').innerHTML = "<p>Loading...</p>";
+            document.getElementById('myModal').style.display = 'block';
+
+            fetch('../data/transaksi.json')
+                .then(response => response.json())
+                .then(data => {
+                    let content = '';
+                    if (Array.isArray(data) && data.length > 0) {
+                        data.forEach(transaction => {
+                            if (transaction.status === "Accept") {
+                                content += "<p>Ada uang masuk sebesar " + transaction.totalBayar + " dari " + transaction.nama + "</p>";
+                            }
+                        });
+                        if (content === '') {
+                            content = "<p>Tidak ada transaksi dengan status 'Accept'.</p>";
+                        }
+                    } else {
+                        content = "<p>Data transaksi masih kosong.</p>";
+                    }
+                    document.getElementById('modal-body').innerHTML = content;
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    document.getElementById('modal-body').innerHTML = "<p>Error loading data.</p>";
+                });
+        }
+
+        document.querySelector('.close').onclick = function () {
+            document.getElementById('myModal').style.display = 'none';
+        };
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+        // Modal Mobil
+
+        function openModalMobil() {
+            updateButtonText();
+            document.getElementById('registerModalMobil').style.display = 'block';
+        }
+
+        function closeModalMobil() {
+            document.getElementById('registerModalMobil').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('registerModalMobil')) {
+                closeModalMobil();
+            }
+        }
+
+        //Handle Logika Modal Mobil
+        document.addEventListener("DOMContentLoaded", function () {
+            const namaMobilInput = document.getElementById("namaMobil");
+            const hargaMobilInput = document.getElementById("hargaMobil");
+            const noPolInput = document.getElementById("noPol");
+            const fileInput = document.getElementById("fileInput");
+            const submitMobilBtn = document.getElementById("submitMobil");
+            const uploadIcon = document.getElementById("uploadIcon");
+
+            function checkFormValidity() {
+                if (
+                    namaMobilInput.value.trim() &&
+                    hargaMobilInput.value.trim() &&
+                    noPolInput.value.trim() &&
+                    fileInput.files.length > 0
+                ) {
+                    submitMobilBtn.disabled = false;
+                } else {
+                    submitMobilBtn.disabled = true;
+                }
+            }
+
+            [namaMobilInput, hargaMobilInput, noPolInput, fileInput].forEach(input => {
+                input.addEventListener("input", checkFormValidity);
+            });
+
+            fileInput.addEventListener("change", function () {
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        uploadIcon.src = e.target.result;
+                    };
+
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            });
+
+            document.getElementById("registerFormMobil").addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const formData = new FormData();
+                formData.append("namaMobil", namaMobilInput.value);
+                formData.append("hargaMobil", parseInt(hargaMobilInput.value));
+                formData.append("noPol", noPolInput.value);
+                formData.append("gambar", fileInput.files[0]);
+
+                fetch('submit_mobil.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if (data.success) {
+                            document.getElementById("registerFormMobil").reset();
+                            submitMobilBtn.disabled = true;
+                            uploadIcon.src = "../../src/drop icon.png";
+                            alert(data.message);
+                            location.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Terjadi kesalahan saat mengirim data.");
+                    });
+            });
+        });
+
+        function updateButtonText() {
+            const btnUser = document.getElementById("btnUser");
+            const user = JSON.parse(sessionStorage.getItem("loggedInAdmin"));
+
+            if (user && user.username) {
+                btnUser.textContent = "Hi, " + user.username + "!";
+            } else {
+                alert("Anda Perlu Login, Silahkan Login Kembali!");
+                window.location.href = "../logAdmin.html";
+                sessionStorage.clear();
+            }
+        }
+
+        document.getElementById("btnUser").addEventListener("click", function () {
+            const dropdownMenu = document.getElementById("dropdownMenu");
+            dropdownMenu.classList.toggle("show");
+        });
+
+        document
+            .getElementById("btnLogout")
+            .addEventListener("click", function () {
+                document.getElementById("confirmationPopup").style.display = "block";
+            });
+
+        function confirmLogout(confirmed) {
+            if (confirmed) {
+                sessionStorage.clear();
+                window.location.href = "../logAdmin.html";
+            } else {
+                document.getElementById("confirmationPopup").style.display = "none";
+            }
+        }
+        window.onclick = function (event) {
+            if (!event.target.matches("#btnUser")) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains("show")) {
+                        openDropdown.classList.remove("show");
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+
+<!-- Site footer -->
+<footer class="site-footer">
+    <div class="containerFooter">
+        <div class="row">
+            <div class="company">
+                <h6>Company</h6>
+                <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+            </div>
+            <div class="social">
+                <h6>Social</h6>
+                <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+            </div>
+        </div>
+        <div class="Contact" style="margin-top: 20px;">
+            <h6>Legal</h6>
+            <p class="text-justify">PT. SUKSES JAYA TRANSPORINDO</p>
+        </div>
+        <hr>
+        <div class="footerContainer">
+            <div class="row">
+                <div class="col-md-8 col-sm-6 col-xs-12">
+                    <p class="copyright-text">PT. SUKSES JAYA TRANSPORINDO</p>
+                </div>
+            </div>
+        </div>
+</footer>
+
+
+</html>
